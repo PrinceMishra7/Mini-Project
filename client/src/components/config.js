@@ -6,7 +6,7 @@ import ABI from '../artifacts/contracts/Crowdfunding.sol/Crowdfunding.json'
 
 // const value = parseEther('1.0');
 const provider = new JsonRpcProvider('http://localhost:8545');
-export const contractAddress = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+export const contractAddress = '0x7a2088a1bFc9d81c55368AE168C2C02570cB814F'
 
 // Function to connect to a wallet
 export async function connectWallet() {
@@ -28,10 +28,31 @@ export async function connectWallet() {
 
 export async function createcampaign(_seeker,_title, _description, _goal) {
   try {
-    console.log(_seeker+" "+_title+" "+_description+ " " +_goal)
     const signer = provider.getSigner();
     const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
     const tx = await contract.connect(signer).createCampaign(ethers.getAddress(_seeker),_title, _description, _goal);
+    console.log(tx);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function approvecampaign(_id) {
+  try {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const tx = await contract.connect(signer).approveCampaign(_id);
+    console.log(tx);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function rejectcampaign(_id) {
+  try {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const tx = await contract.connect(signer).rejectCampaign(_id);
     console.log(tx);
   } catch (error) {
     console.log(error);
@@ -47,5 +68,76 @@ export async function getCampaign() {
     return result
   } catch (error) {
     console.log(error)
+  }
+}
+
+export async function getPendingAdminCampaign() {
+  try {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const result = await contract.getPendingAdminCampaigns();
+    console.log(result)
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function getUserVotingCampaign() {
+  try {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const result = await contract.getUserVotingCampaigns();
+    console.log(result)
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function getUserDonatingCampaign() {
+  try {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const result = await contract.getUserDonatingCampaigns();
+    console.log(result)
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function makevote(_id,_val) {
+  try {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const tx = await contract.connect(signer).makeVote(_id,_val);
+    console.log(tx);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function endvoting(_id) {
+  try {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const tx = await contract.connect(signer).endVoting(_id);
+    console.log(tx);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function donatetocampaign(_id,val) {
+  try {
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const amount = ethers.parseEther(val);
+    // const amount = val;
+    const tx = await contract.connect(signer).donateToCampaign(_id,{value:amount});
+    console.log(tx);
+  } catch (error) {
+    console.log(error);
   }
 }

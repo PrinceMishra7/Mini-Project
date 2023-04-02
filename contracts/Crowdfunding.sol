@@ -11,7 +11,9 @@ contract Crowdfunding {
         bool approved;
         bool completed;
         bool voteApproved;
+        bool voteRejected;
         uint256 phase;
+        uint256 campaignNo;
         bool rejected;
         address[] donators;
         uint256[] donations;
@@ -21,11 +23,19 @@ contract Crowdfunding {
     address public admin;
     
     mapping(uint => Campaign) public campaigns;
+
     uint public campaignsCount;
+    uint public approvalCount;
+    uint public votingCount;
+    uint public donatingCount;
+    uint public finishedCount;
     
     constructor() {
         admin = msg.sender;
         campaignsCount = 0;
+        approvalCount = 0;
+        votingCount = 0;
+        finishedCount = 0;
     }
     
     function createCampaign(address _seeker,string memory _title, string memory _description, uint _goal) public returns(uint256){
@@ -37,10 +47,13 @@ contract Crowdfunding {
         campaign.completed=false;
         campaign.goal=_goal;
         campaign.voteApproved=false;
+        campaign.voteRejected=false;
         campaign.raised=0;
         campaign.phase=0;
         campaign.rejected=false;
+        campaign.campaignNo = campaignsCount;
         campaignsCount++;
+        approvalCount++;
         return campaignsCount;
     }
 
@@ -48,18 +61,23 @@ contract Crowdfunding {
         require(msg.sender == admin, "Only admin can approve campaigns");
         Campaign storage campaign = campaigns[_id];
         campaign.approved=true;
+        campaign.phase=1;
+        approvalCount--;
+        votingCount++;
     }
 
     function rejectCampaign(uint256 _id) public {
         require(msg.sender == admin, "Only admin can approve campaigns");
         Campaign storage campaign = campaigns[_id];
         campaign.rejected=true;
+        campaign.phase=1;
+        approvalCount--;
+        votingCount++;
     }
 
     function startVoting(uint256 _id) public{
         Campaign storage campaign = campaigns[_id];
         require(msg.sender == admin, "Only admin can start voting");
-        require(campaign.approved == true, "Need to be approved by admin first");
         campaign.phase=1;
     }
 
@@ -75,9 +93,23 @@ contract Crowdfunding {
         require(msg.sender == admin, "Only admin can end voting");
         require(campaign.phase == 1, "Voting not yet started");
         campaign.phase=2;
+        votingCount--;
+        uint256 len=campaign.votes.length;
+        uint256 posVote=0;
+        for(uint256 i=0;i<len;i++){
+            if(campaign.votes[i]==1){
+                posVote++;
+            }
+        }
+        if(posVote>=len/2){
+            campaign.voteApproved=true;
+            donatingCount++;
+        }
+        else{
+            campaign.voteRejected=true;
+            
+        }
     }
-
-  
 
     function votingResult(uint256 _id) public{
         Campaign storage campaign = campaigns[_id];
@@ -96,14 +128,14 @@ contract Crowdfunding {
             
         }
         else{
-            campaign.rejected=true;
+            campaign.voteRejected=true;
             
         }
     }
     function donateToCampaign(uint256 _id) public payable{
         Campaign storage campaign = campaigns[_id];
-        require(campaign.phase == 3,"Voting result not yet declared");
-        require(campaign.rejected==false,"This Campaign has been rejected");
+        require(campaign.phase == 2,"Voting result not yet declared");
+        // require(campaign.rejected==false,"This Campaign has been rejected");
 
         uint256 amount = msg.value;
         campaign.donators.push(msg.sender);
@@ -148,4 +180,42 @@ contract Crowdfunding {
         return allCampaigns;
     }
 
+    function getPendingAdminCampaigns() public view returns (Campaign[] memory) {
+        uint256 temp =0;
+        Campaign[] memory allCampaigns = new Campaign[](approvalCount);
+        for(uint i = 0; i < campaignsCount; i++) {
+            if(campaigns[i].approved!=false && campaigns[i].rejected!=false) continue;
+            if(campaigns[i].phase != 0) continue;
+            Campaign storage item = campaigns[i];
+            allCampaigns[temp] = item;
+            temp++;
+        }
+        return allCampaigns;
+    }
+
+    function getUserVotingCampaigns() public view returns (Campaign[] memory) {
+        uint256 temp =0;
+        Campaign[] memory allCampaigns = new Campaign[](votingCount);
+        for(uint i = 0; i < campaignsCount; i++) {
+            if(campaigns[i].approved==false && campaigns[i].rejected==false) continue;
+            if(campaigns[i].phase != 1) continue;
+            Campaign storage item = campaigns[i];
+            allCampaigns[temp] = item;
+            temp++;
+        }
+        return allCampaigns;
+    }
+
+    function getUserDonatingCampaigns() public view returns (Campaign[] memory) {
+        uint256 temp =0;
+        Campaign[] memory allCampaigns = new Campaign[](donatingCount);
+        for(uint i = 0; i < campaignsCount; i++) {
+            if(campaigns[i].voteApproved!=true) continue;
+            if(campaigns[i].phase != 2) continue;
+            Campaign storage item = campaigns[i];
+            allCampaigns[temp] = item;
+            temp++;
+        }
+        return allCampaigns;
+    }
 }

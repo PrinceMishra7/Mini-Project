@@ -142,7 +142,7 @@ contract Crowdfunding {
         campaign.donations.push(amount);
         (bool sent,) = payable(campaign.seeker).call{value: amount}("");
         if(sent) {
-            campaign.raised = campaign.raised + amount;
+            campaign.raised = campaign.raised + (amount/ 1 ether);
         }
     }
 

@@ -9,11 +9,14 @@ import Landing from "./components/Landing";
 import UserDashboard from "./components/user/UserDashboard";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import './App.css';
+import Navbar from './components/navbar';
+import Footer from './components/footer';
 
 function App() {
   return (
     <div className="Apps">
       <BrowserRouter>
+      <Navbar/>
       <Routes>
         <Route path='/admin/campaignlist' element={<CampaignList/>} />
         <Route path='/admin/approval' element={<PendingAdminApproval/>} />
@@ -25,6 +28,7 @@ function App() {
         <Route path='/user/dashboard' element={<UserDashboard/>} />
         <Route path='/admin/dashboard' element={<AdminDashboard/>} />
       </Routes>
+      <Footer/>
       </BrowserRouter>
     </div>
   );

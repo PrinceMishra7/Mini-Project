@@ -16,6 +16,7 @@ const DonateCampaignList = () => {
             <div>Receipent: {c[2]}</div>
             <div>Goal: {Number(c[3])}</div>
             <div>Amount Raised: {Number(c[4])}</div>
+            <div>Contributors: </div>
             <div>
               <input type='number' name='amount' value={amount} onChange={(e)=>setAmount(e.target.value)}/>
               <button onClick={()=>donatetocampaign(Number(c[10]),amount)}>Donate</button>

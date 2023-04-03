@@ -1,16 +1,16 @@
 import React,{useState,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
-import { connectWallet } from '../config';
+// import { connectWallet } from '../config';
 const Navbar = () => {
     const [account,setAccount] =useState(null);
-    const getCurrentAccount = async () => {
-        const {account} = await connectWallet();
-        setAccount(account);
-    }
-    let navigate = useNavigate();
-    useEffect(() => {
-        getCurrentAccount();
-    }, [])
+    // const getCurrentAccount = async () => {
+    //     const {account} = await connectWallet();
+    //     setAccount(account);
+    // }
+    // let navigate = useNavigate();
+    // useEffect(() => {
+    //     getCurrentAccount();
+    // }, [])
   return (
     <div>
 

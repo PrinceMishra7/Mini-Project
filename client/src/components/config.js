@@ -6,7 +6,7 @@ import ABI from '../artifacts/contracts/Crowdfunding.sol/Crowdfunding.json'
 
 // const value = parseEther('1.0');
 const provider = new JsonRpcProvider('http://localhost:8545');
-export const contractAddress = '0x7a2088a1bFc9d81c55368AE168C2C02570cB814F'
+export const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3PS'
 
 // Function to connect to a wallet
 export async function connectWallet() {

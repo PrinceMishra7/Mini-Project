@@ -14,7 +14,7 @@ const DonationCampaign = () => {
     }, [])
     let per;
     if (data) {
-        per = Number(data[4]) / Number(data[3]) * 100;
+        per = (Number(data[4]) / Number(data[3]) * 100);
         per = per.toFixed(2);
     }
     return (
@@ -60,7 +60,7 @@ const DonationCampaign = () => {
                                                 </div>
                                                 <div className='py-2'>
                                                     <div class="relative">
-                                                        <input type="number" id="search" class="block w-full p-4 pl-10 text-sm text-white border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" value={amount} onChange={(e) => setAmount(e.target.value)} />
+                                                        <input type="number" id="search" class="block w-full p-4 pl-10 text-sm text-black border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" value={amount} onChange={(e) => setAmount(e.target.value)} />
                                                         <button type="submit" class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 " onClick={() => donatetocampaign(id.id, amount)}>Donate</button>
                                                     </div>
 

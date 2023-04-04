@@ -10,6 +10,10 @@ import ABI from '../artifacts/contracts/Crowdfunding.sol/Crowdfunding.json'
 let provider = new ethers.BrowserProvider(window.ethereum)
 export const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
 
+export async function connectWallet(){
+  return (await provider.getSigner()).address;
+}
+
 export async function createcampaign(_seeker, _title, _description, _goal, _downloadURL) {
   try {
     const signer = await provider.getSigner();

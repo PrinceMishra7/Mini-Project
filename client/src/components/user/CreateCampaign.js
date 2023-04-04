@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { createcampaign } from "../config"
+import React, { useEffect, useState } from 'react'
+import { createcampaign, connectWallet } from "../config"
 import { handleUploadClick } from '../firebaseconfig';
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
@@ -42,13 +42,18 @@ const CreateCampaign = () => {
       }
   }
 
+  useEffect(() => {
+    connectWallet().then((res)=>setDetails({...details,["seeker"]:res}))
+  }, [])
+  
+
   return (
     <div>
       <Navbar />
       <div className='flex'>
       <Sidebar active='2'/>
       {/* main content */}
-      <section class="max-w-4xl p-6 mx-auto bg-green-500  rounded-md shadow-md  my-auto" style={{height:'550px'}}>
+      <section class="max-w-4xl p-6 mx-auto bg-green-500  rounded-md shadow-md  my-auto" >
     <h1 class="text-xl font-bold text-white capitalize ">Create Campaign</h1>
     
         <div class="grid grid-cols-2 gap-6 mt-4 p-2">
@@ -63,6 +68,8 @@ const CreateCampaign = () => {
                 <label class="text-white " for="goal">Goal</label>
                 <input id="goal" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md   focus:border-blue-500  focus:outline-none focus:ring"   onChange={handleInputs} name="goal" value={details.goal}/>
             </div>
+        </div>
+        <div class="grid grid-cols-1 gap-6 mt-4 p-2">
             <div >
                 <label class="text-white " for="reciepent">Reciepent</label>
                 <input id="reciepent" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md    focus:border-blue-500  focus:outline-none focus:ring" onChange={handleInputs} name="seeker" value={details.seeker}/>
@@ -72,8 +79,6 @@ const CreateCampaign = () => {
                 <label class="text-white " for="description">Description</label>
                 <textarea id="description" type="textarea" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md   focus:border-blue-500  focus:outline-none focus:ring"  onChange={handleInputs} name="description" value={details.description}></textarea>
             </div>
-
-            
         </div>
         <div>
                 <label class="block text-sm font-medium text-white">

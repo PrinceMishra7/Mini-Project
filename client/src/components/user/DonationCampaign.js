@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getDetailCampaigns,donatetocampaign } from './config';
-import VerifiedBadge from "../images/pngwing.com.png"
-const CampaignDetails = () => {
+import { getDetailCampaigns,donatetocampaign } from '../config';
+import VerifiedBadge from "../../images/pngwing.com.png"
+const DonationCampaign = () => {
     const [amount, setAmount] = useState(0);
     const [data, setData] = useState(null);
     let id = useParams();
@@ -16,7 +16,7 @@ const CampaignDetails = () => {
     }
     return (
         <div>
-            {data && Number(data[7]) == 2 ?
+            {data  && Number(data[7]) == 2 ?
                 <section class="text-gray-600 body-font overflow-hidden">
                     <div class="container px-5 py-24 mx-auto">
                         <div class="lg:w-4/5 mx-auto flex flex-wrap">
@@ -60,4 +60,4 @@ const CampaignDetails = () => {
     )
 }
 
-export default CampaignDetails
+export default DonationCampaign

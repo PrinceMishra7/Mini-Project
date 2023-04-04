@@ -8,7 +8,7 @@ import DonateCampaignList from "./components/user/DonateCampaignList";
 import Landing from "./components/Landing";
 import UserDashboard from "./components/user/UserDashboard";
 import AdminDashboard from "./components/admin/AdminDashboard";
-import CampaignDetails from "./components/CampaignDetails";
+import DonationCampaign from "./components/user/DonationCampaign";
 import './App.css';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
@@ -28,7 +28,7 @@ function App() {
         <Route path='/' element={<Landing/>} />
         <Route path='/user/dashboard' element={<UserDashboard/>} />
         <Route path='/admin/dashboard' element={<AdminDashboard/>} />
-        <Route path='/campaign/:id' element={<CampaignDetails/>} />
+        <Route path='/donate/:id' element={<DonationCampaign/>} />
       </Routes>
       {/* <Footer/> */}
       </BrowserRouter>

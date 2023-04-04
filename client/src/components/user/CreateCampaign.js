@@ -26,9 +26,13 @@ const CreateCampaign = () => {
     return downloadUrls;
   }
   async function passData(){
+    console.log("Creating campaign...")
+   
     await createcampaign(details.seeker, details.title, details.description, details.goal,downloadUrl);
+    console.log("Campaign created")
   }
   const submitInfo = async () => {
+    console.log(details.seeker, details.title, details.description, details.goal)
       try {
         const downloadUrl = await uploadFile();
         await passData(downloadUrl);
@@ -43,54 +47,32 @@ const CreateCampaign = () => {
       <Navbar />
       <div className='flex'>
       <Sidebar active='2'/>
-      <section class="max-w-4xl p-6 mx-auto bg-indigo-600 rounded-md shadow-md dark:bg-gray-800 mt-2">
-    <h1 class="text-xl font-bold text-white capitalize dark:text-white">Account settings</h1>
-    <form>
-        <div class="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+      {/* main content */}
+      <section class="max-w-4xl p-6 mx-auto bg-green-500  rounded-md shadow-md  my-auto" style={{height:'550px'}}>
+    <h1 class="text-xl font-bold text-white capitalize ">Create Campaign</h1>
+    
+        <div class="grid grid-cols-2 gap-6 mt-4 p-2">
             <div>
-                <label class="text-white dark:text-gray-200" for="username">Username</label>
-                <input id="username" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
+                <label class="text-white " for="username">Title</label>
+                <input id="title" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-blue-500  focus:outline-none focus:ring"
+               onChange={handleInputs}  />
+            </div>
+            
+
+            <div >
+                <label class="text-white " for="goal">Goal</label>
+                <input id="goal" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md   focus:border-blue-500  focus:outline-none focus:ring"   onChange={handleInputs}/>
+            </div>
+            <div >
+                <label class="text-white " for="reciepent">Reciepent</label>
+                <input id="reciepent" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md    focus:border-blue-500  focus:outline-none focus:ring" onChange={handleInputs} />
+            </div>
+          
+            <div>
+                <label class="text-white " for="description">Description</label>
+                <textarea id="description" type="textarea" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md   focus:border-blue-500  focus:outline-none focus:ring"  onChange={handleInputs}  ></textarea>
             </div>
 
-            <div>
-                <label class="text-white dark:text-gray-200" for="emailAddress">Email Address</label>
-                <input id="emailAddress" type="email" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
-            </div>
-
-            <div>
-                <label class="text-white dark:text-gray-200" for="password">Password</label>
-                <input id="password" type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
-            </div>
-
-            <div>
-                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Password Confirmation</label>
-                <input id="passwordConfirmation" type="password" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
-            </div>
-            <div>
-                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Color</label>
-                <input id="color" type="color" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
-            </div>
-            <div>
-                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Select</label>
-                <select class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring">
-                    <option>Surabaya</option>
-                    <option>Jakarta</option>
-                    <option>Tangerang</option>
-                    <option>Bandung</option>
-                </select>
-            </div>
-            <div>
-                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Range</label>
-                <input id="range" type="range" class="block w-full py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
-            </div>
-            <div>
-                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Date</label>
-                <input id="date" type="date" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"/>
-            </div>
-            <div>
-                <label class="text-white dark:text-gray-200" for="passwordConfirmation">Text Area</label>
-                <textarea id="textarea" type="textarea" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring"></textarea>
-            </div>
             <div>
                 <label class="block text-sm font-medium text-white">
                 Image
@@ -103,7 +85,8 @@ const CreateCampaign = () => {
                   <div class="flex text-sm text-gray-600">
                     <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                       <span class="">Upload a file</span>
-                      <input id="file-upload" name="file-upload" type="file" class="sr-only"/>
+                      <input id="file-upload" name="file-upload" type="file" class="sr-only" 
+                      onChange={handleFileChange}/>
                     </label>
                     <p class="pl-1 text-white">or drag and drop</p>
                   </div>
@@ -116,9 +99,11 @@ const CreateCampaign = () => {
         </div>
 
         <div class="flex justify-end mt-6">
-            <button class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-pink-500 rounded-md hover:bg-pink-700 focus:outline-none focus:bg-gray-600">Save</button>
+            <button class="px-6 py-2 leading-5 text-white font-bold transition-colors duration-200 transform bg-green-900 rounded-md hover:bg-green-700 focus:outline-none focus:bg-gray-600"  
+            onClick={submitInfo}
+            >Create</button>
         </div>
-    </form>
+    
 </section>
       </div>
       

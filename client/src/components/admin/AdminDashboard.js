@@ -2,6 +2,7 @@ import React from 'react'
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 const AdminDashboard = () => {
+  
     
   return (
     <div>

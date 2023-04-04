@@ -10,8 +10,8 @@ const UserDashboard = () => {
     <div className='flex'>
     <Sidebar active='1' />
     <main>
-<h1>User Dashboard</h1>
-</main>
+          <h1>User Dashboard</h1>
+    </main>
     </div>
 
 

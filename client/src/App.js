@@ -1,6 +1,7 @@
 import { Routes, Route, BrowserRouter} from "react-router-dom";
 import CreateCampaign from './components/user/CreateCampaign';
 import CampaignList from "./components/admin/CampaignList";
+import CampaignPage from "./components/admin/CampaignPage";
 import PendingAdminApproval from "./components/admin/PendingAdminApproval";
 import VoteCampaign from "./components/user/VoteCampaign"
 import FinishVoting from "./components/admin/FinishVoting";
@@ -28,7 +29,8 @@ function App() {
         <Route path='/' element={<Landing/>} />
         <Route path='/user/dashboard' element={<UserDashboard/>} />
         <Route path='/admin/dashboard' element={<AdminDashboard/>} />
-        <Route path='/donate/:id' element={<DonationCampaign/>} />
+        <Route path='/user/donate/:id' element={<DonationCampaign/>} />
+        <Route path='/admin/campaign/:id' element={<CampaignPage/>} />
       </Routes>
       {/* <Footer/> */}
       </BrowserRouter>

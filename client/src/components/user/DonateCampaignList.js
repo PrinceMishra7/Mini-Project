@@ -49,7 +49,7 @@ const DonateCampaignList = () => {
                   </div>
                   <div class="flex justify-end mt-6">
                 <button class="px-6 py-2 leading-5 text-white font-bold transition-colors duration-200 transform bg-green-900 rounded-md hover:bg-green-700 focus:outline-none focus:bg-green-600"
-                  onClick={()=>navigate('/donate/'+Number(c[8]))}
+                  onClick={()=>navigate('/user/donate/'+Number(c[8]))}
                 >View More</button>
               </div>
                 </div>

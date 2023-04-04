@@ -1,18 +1,12 @@
 import React,{useState,useEffect} from 'react'
-// import { connectWallet } from '../config';
+import { connectWallet } from '../config';
 const Navbar = () => {
-    const [account,setAccount] =useState(null);
-    // const getCurrentAccount = async () => {
-    //     const {account} = await connectWallet();
-    //     setAccount(account);
-    // }
-    // let navigate = useNavigate();
-    // useEffect(() => {
-    //     getCurrentAccount();
-    // }, [])
+  const [account,setAccount] =useState(null);
+  useEffect(() => {
+    connectWallet().then((res)=>setAccount(res))
+  }, [])
   return (
     <div>
-
 <header class="text-gray-600 body-font">
   <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">

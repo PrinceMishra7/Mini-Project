@@ -7,7 +7,13 @@ const AdminDashboard = () => {
     <div>
 
 <Navbar/>
+<div className="flex">
 <Sidebar active='1' />
+<main>
+<h1>Admin Dashboard</h1>
+</main>
+</div>
+
 
 
 {/* 

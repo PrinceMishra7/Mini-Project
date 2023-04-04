@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="Apps">
       <BrowserRouter>
-      <Navbar/>
+      {/* <Navbar/> */}
       <Routes>
         <Route path='/admin/campaignlist' element={<CampaignList/>} />
         <Route path='/admin/approval' element={<PendingAdminApproval/>} />
@@ -30,7 +30,7 @@ function App() {
         <Route path='/admin/dashboard' element={<AdminDashboard/>} />
         <Route path='/campaign/:id' element={<CampaignDetails/>} />
       </Routes>
-      <Footer/>
+      {/* <Footer/> */}
       </BrowserRouter>
     </div>
   );

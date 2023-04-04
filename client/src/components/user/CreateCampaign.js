@@ -55,25 +55,27 @@ const CreateCampaign = () => {
             <div>
                 <label class="text-white " for="username">Title</label>
                 <input id="title" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-blue-500  focus:outline-none focus:ring"
-               onChange={handleInputs}  />
+               onChange={handleInputs} name="title" value={details.title} />
             </div>
             
 
             <div >
                 <label class="text-white " for="goal">Goal</label>
-                <input id="goal" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md   focus:border-blue-500  focus:outline-none focus:ring"   onChange={handleInputs}/>
+                <input id="goal" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md   focus:border-blue-500  focus:outline-none focus:ring"   onChange={handleInputs} name="goal" value={details.goal}/>
             </div>
             <div >
                 <label class="text-white " for="reciepent">Reciepent</label>
-                <input id="reciepent" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md    focus:border-blue-500  focus:outline-none focus:ring" onChange={handleInputs} />
+                <input id="reciepent" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md    focus:border-blue-500  focus:outline-none focus:ring" onChange={handleInputs} name="seeker" value={details.seeker}/>
             </div>
           
             <div>
                 <label class="text-white " for="description">Description</label>
-                <textarea id="description" type="textarea" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md   focus:border-blue-500  focus:outline-none focus:ring"  onChange={handleInputs}  ></textarea>
+                <textarea id="description" type="textarea" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md   focus:border-blue-500  focus:outline-none focus:ring"  onChange={handleInputs} name="description" value={details.description}></textarea>
             </div>
 
-            <div>
+            
+        </div>
+        <div>
                 <label class="block text-sm font-medium text-white">
                 Image
               </label>
@@ -83,7 +85,7 @@ const CreateCampaign = () => {
                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                   <div class="flex text-sm text-gray-600">
-                    <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                    <label for="file-upload" class="relative py-1 px-1 cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                       <span class="">Upload a file</span>
                       <input id="file-upload" name="file-upload" type="file" class="sr-only" 
                       onChange={handleFileChange}/>
@@ -96,8 +98,6 @@ const CreateCampaign = () => {
                 </div>
               </div>
             </div>
-        </div>
-
         <div class="flex justify-end mt-6">
             <button class="px-6 py-2 leading-5 text-white font-bold transition-colors duration-200 transform bg-green-900 rounded-md hover:bg-green-700 focus:outline-none focus:bg-gray-600"  
             onClick={submitInfo}

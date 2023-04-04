@@ -8,7 +8,7 @@ import ABI from '../artifacts/contracts/Crowdfunding.sol/Crowdfunding.json'
 // const provider = new JsonRpcProvider('http://localhost:8545');
 // const provider = ethers.getDefaultProvider('http://localhost:8545');
 let provider = new ethers.BrowserProvider(window.ethereum)
-export const contractAddress = '0xa513E6E4b8f2a923D98304ec87F64353C4D5C853'
+export const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3'
 
 export async function createcampaign(_seeker, _title, _description, _goal, _downloadURL) {
   try {

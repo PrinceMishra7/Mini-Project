@@ -17,16 +17,18 @@ export async function handleUploadClick(file) {
         firebase.initializeApp(firebaseConfig);
         const storageRef = await firebase.storage().ref();
         const fileRef = await storageRef.child(file.name);
+        await fileRef.put(file);
+      const downloadUrl = await fileRef.getDownloadURL();
+      console.log('Download URL:', downloadUrl);
+      return downloadUrl;
+    }
+};
 
-        // await fileRef.put(file).then(() => {
-        //     console.log('File uploaded successfully');
-        //     fileRef.getDownloadURL().then((url) => {
-        //         console.log('Download URL:', url);
-        //         return url;
-        //     });
-        // }).catch((error) => {
-        //     console.error(error);
-        // });
+export async function handleUploadsClick(file) {
+    if (file) {
+        firebase.initializeApp(firebaseConfig);
+        const storageRef = await firebase.storage().ref();
+        const fileRef = await storageRef.child(file.name);
         await fileRef.put(file);
       const downloadUrl = await fileRef.getDownloadURL();
       console.log('Download URL:', downloadUrl);

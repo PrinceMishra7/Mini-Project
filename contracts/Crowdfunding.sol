@@ -16,7 +16,7 @@ contract Crowdfunding {
         uint256[] donations;
         address[] voters;
         uint256[] votes;
-        string documentURL;
+        string[] documentURL;
         uint256 finalCount;
         address fundraiser;
     }
@@ -38,7 +38,7 @@ contract Crowdfunding {
         finishedCount = 0;
     }
     
-    function createCampaign(address _seeker,string memory _title, string memory _description, uint _goal,string memory _documentURL) public returns(uint256){
+    function createCampaign(address _seeker,string memory _title, string memory _description, uint _goal,string memory _documentURL,string memory _imageURL) public returns(uint256){
         Campaign storage campaign=campaigns[campaignsCount];
         campaign.seeker=_seeker;
         campaign.title=_title;
@@ -49,7 +49,8 @@ contract Crowdfunding {
         campaign.raised=0;
         campaign.phase=0;
         campaign.campaignNo = campaignsCount;
-        campaign.documentURL = _documentURL;
+        campaign.documentURL.push( _documentURL);
+        campaign.documentURL.push( _imageURL);
         campaign.finalCount = 0;
         campaign.fundraiser = msg.sender;
         campaignsCount++;

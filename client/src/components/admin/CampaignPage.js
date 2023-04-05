@@ -24,7 +24,7 @@ const DonationCampaign = () => {
         <div>
 
             <div>
-                <Navbar />
+                {/* <Navbar /> */}
                 <div className='flex'>
                     <Sidebar active='2' />
                     {/* main content */}

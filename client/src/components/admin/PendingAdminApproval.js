@@ -13,7 +13,7 @@ const PendingAdminApproval = () => {
 
   return (
     <div>
-      <Navbar/>
+      {/* <Navbar/> */}
       <div className="flex">
         <Sidebar active='3' />
         

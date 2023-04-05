@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 const Sidebar = ({active}) => {
     let navigate = useNavigate();
   return (
-    <aside class="flex flex-col w-64  px-4 py-2 overflow-y-auto bg-green-500 " style={{height:'670px'}}>
+    <aside class="flex flex-col w-64  px-4 py-2 overflow-y-auto bg-green-500 " style={{height:'95vh'}}>
     <div class="flex flex-col justify-between flex-1 mt-2">
         <nav>
             <div href="/user/dashboard" class={active==='1'?"flex items-center px-4 py-2 mt-5 text-black bg-white rounded-md cursor-pointer":"flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-md  hover:bg-gray-100 hover:text-gray-700 cursor-pointer"} onClick={()=>navigate("/user/dashboard")}>

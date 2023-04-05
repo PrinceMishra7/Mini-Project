@@ -13,7 +13,7 @@ const DonateCampaignList = () => {
   }, [])
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className='flex'>
         <Sidebar active='4' />
         <div class="container px-5 my-5 ">

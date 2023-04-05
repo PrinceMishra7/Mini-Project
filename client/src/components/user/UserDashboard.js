@@ -6,7 +6,7 @@ const UserDashboard = () => {
     let navigate = useNavigate();
   return (
     <div>
-    <Navbar/>
+    {/* <Navbar/> */}
     <div className='flex'>
     <Sidebar active='1' />
     <main>

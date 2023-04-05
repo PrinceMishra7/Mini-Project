@@ -1,10 +1,27 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import "../admin/sidebar.css"
+import { connectWallet } from "../config";
+import { useState, useEffect } from "react";
 
 const Sidebar = ({active}) => {
     let navigate = useNavigate();
+    const [account, setAccount] = useState(null);
+
+    useEffect(() => {
+      connectWallet().then((res) => setAccount(res));
+    }, []);
   return (
-    <aside class="flex flex-col w-64  px-4 py-2 overflow-y-auto bg-green-500 " style={{height:'95vh'}}>
+    <aside class="dingdong flex flex-col w-64  px-4 py-2 overflow-y-auto bg-green-500 ">
+         <div class="text-center">
+        <img
+          src="https://tecdn.b-cdn.net/img/new/avatars/5.webp"
+          class="mx-auto mb-4 w-32 rounded-lg"
+          alt="Avatar"
+        />
+        <h5 class="mb-2 text-xl font-medium leading-tight">John Doe</h5>
+        <p class="text-neutral-500 " style={{color: "white"}}>{account}</p>
+      </div>
     <div class="flex flex-col justify-between flex-1 mt-2">
         <nav>
             <div href="/user/dashboard" class={active==='1'?"flex items-center px-4 py-2 mt-5 text-black bg-white rounded-md cursor-pointer":"flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-md  hover:bg-gray-100 hover:text-gray-700 cursor-pointer"} onClick={()=>navigate("/user/dashboard")}>

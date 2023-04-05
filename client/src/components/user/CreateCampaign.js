@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { createcampaign, connectWallet } from "../config"
 import { handleUploadClick,handleUploadsClick } from '../firebaseconfig';
 import Sidebar from './Sidebar';
+import "../admin/sidebar.css"
 import Navbar from './Navbar';
 const CreateCampaign = () => {
   const [details, setDetails] = useState({ seeker: "", title: "", description: "", goal: 0 });
@@ -97,11 +98,11 @@ const CreateCampaign = () => {
 
   return (
     <div>
-      <Navbar />
-      <div className='flex'>
+      {/* <Navbar /> */}
+      <div className='flex  '>
       <Sidebar active='2'/>
       {/* main content */}
-      <section class="max-w-4xl p-6 mx-auto bg-green-500  rounded-md shadow-md  my-auto" >
+      <section class="max-w-4xl p-6 mx-auto bg-green-500  rounded-md shadow-md mt-5 mb-5 my-auto container px-5 my-5 " >
     <h1 class="text-xl font-bold text-white capitalize ">Create Campaign</h1>
     
         <div class="grid grid-cols-2 gap-6 mt-4 p-2">

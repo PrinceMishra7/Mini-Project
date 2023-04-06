@@ -98,7 +98,7 @@ const CreateCampaign = () => {
 
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className='flex  '>
       <Sidebar active='2'/>
       {/* main content */}

@@ -3,7 +3,7 @@ import { getUserVotingCampaign, makevote } from "../config";
 import { useNavigate } from "react-router-dom";
 import VerifiedBadge from "../../images/pngwing.com.png";
 import Sidebar from "./Sidebar";
-
+import Navbar from "./Navbar";
 const VoteCampaign = () => {
   let navigate = useNavigate();
   const [campaign, setcampaign] = useState(null);
@@ -13,7 +13,7 @@ const VoteCampaign = () => {
 
   return (
     <div>
-    
+    <Navbar/>
       {/* {campaign?campaign.map((c)=><div>
             <div>Name: {c[0]}</div>
             <div>Description: {c[1]}</div>
@@ -26,8 +26,8 @@ const VoteCampaign = () => {
             </div>):null} */}
 
       <div className="flex">
-        <Sidebar active="4" />
-        <div class="container px-5 my-5 ">
+        <Sidebar active="3" />
+        <div class="container px-5 my-5 w-4/5">
           {campaign
             ? campaign.map(
                 (c) => (

@@ -13,7 +13,7 @@ const Sidebar = ({active}) => {
     }, []);
   return (
     <aside class="dingdong flex flex-col w-64  px-4 py-2 overflow-y-auto bg-green-500 ">
-         <div class="text-center">
+         {/* <div class="text-center">
         <img
           src="https://tecdn.b-cdn.net/img/new/avatars/5.webp"
           class="mx-auto mb-4 w-32 rounded-lg"
@@ -21,7 +21,7 @@ const Sidebar = ({active}) => {
         />
         <h5 class="mb-2 text-xl font-medium leading-tight">John Doe</h5>
         <p class="text-neutral-500 " style={{color: "white"}}>{account}</p>
-      </div>
+      </div> */}
     <div class="flex flex-col justify-between flex-1 mt-2">
         <nav>
             <div href="/user/dashboard" class={active==='1'?"flex items-center px-4 py-2 mt-5 text-black bg-white rounded-md cursor-pointer":"flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-md  hover:bg-gray-100 hover:text-gray-700 cursor-pointer"} onClick={()=>navigate("/user/dashboard")}>

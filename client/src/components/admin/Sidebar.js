@@ -13,7 +13,7 @@ const Sidebar = ({ active }) => {
       className="dingdong flex flex-col w-64  px-4 py-2 overflow-y-auto bg-green-500  "
      
     >
-      <div class="text-center">
+      {/* <div class="text-center">
         <img
           src="https://tecdn.b-cdn.net/img/new/avatars/5.webp"
           class="mx-auto mb-4 w-32 rounded-lg"
@@ -21,7 +21,7 @@ const Sidebar = ({ active }) => {
         />
         <h5 class="mb-2 text-xl font-medium leading-tight">John Doe</h5>
         <p class="text-neutral-500 " style={{color: "white"}}>{account}</p>
-      </div>
+      </div> */}
       <div class="flex flex-col justify-between flex-1 mt-2">
         <nav>
           <a

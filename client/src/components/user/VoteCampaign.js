@@ -94,10 +94,10 @@ const VoteCampaign = () => {
                         </div>
                         <div class="flex justify-end mt-6">
                         <div>
-                          <button class="bg-green-500 hover:bg-green-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full">
+                          <button class="bg-green-500 hover:bg-green-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={()=>makevote(Number(c[10]),1)} >
                             In Favour
                           </button>
-                          <button class="bg-red-500 hover:bg-red-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full">
+                          <button class="bg-red-500 hover:bg-red-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={()=>makevote(Number(c[10]),0)} >
                             Against
                           </button>
                         </div>

@@ -16,7 +16,7 @@ const UserDashboard = () => {
 
   return (
     <div>
-    {/* <Navbar/> */}
+    <Navbar/>
     <div className='flex'>
     <Sidebar active='1' />
     <main className='container w-5/5  px-5 my-5'>

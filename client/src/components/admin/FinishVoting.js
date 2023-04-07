@@ -11,7 +11,7 @@ const FinishVoting = () => {
 
     return (
         <div>
-                {/* <Navbar/> */}
+                <Navbar/>
                 <div className="flex">
                     <Sidebar active='4'/>
                     <div class="container w-4/5  px-5 my-5 ">

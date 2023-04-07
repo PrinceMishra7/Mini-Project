@@ -9,10 +9,11 @@ import WidgetLg from "../elements/widgetLg/WidgetLg";
 import "./home.css";
 const AdminDashboard = () => {
   return (
-    <div>
-      <div className="flex">
+    <div >
+      <Navbar />
+      <div className="flex ">
         <Sidebar active="1" />
-        <main className="container w-5/5  px-5 my-5">
+        <main className="container w-4/5  px-5 my-5">
         <div className="home">
         <FeaturedInfo />
         <Chart

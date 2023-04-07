@@ -13,10 +13,10 @@ const DonateCampaignList = () => {
   }, [])
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className='flex'>
         <Sidebar active='4' />
-        <div class="container px-5 my-5 ">
+        <div class="container px-5 my-5 w-4/5 ">
           {campaign ? campaign.map((c) =>
             <div class=" outline outline-offset-2 outline-green-500 relative rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2">
 

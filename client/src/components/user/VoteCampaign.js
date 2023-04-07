@@ -3,7 +3,7 @@ import { getUserVotingCampaign, makevote } from "../config";
 import { useNavigate } from "react-router-dom";
 import VerifiedBadge from "../../images/pngwing.com.png";
 import Sidebar from "./Sidebar";
-
+import Navbar from "./Navbar";
 const VoteCampaign = () => {
   let navigate = useNavigate();
   const [campaign, setcampaign] = useState(null);
@@ -13,7 +13,7 @@ const VoteCampaign = () => {
 
   return (
     <div>
-    
+    <Navbar/>
       {/* {campaign?campaign.map((c)=><div>
             <div>Name: {c[0]}</div>
             <div>Description: {c[1]}</div>
@@ -94,10 +94,10 @@ const VoteCampaign = () => {
                         </div>
                         <div class="flex justify-end mt-6">
                         <div>
-                          <button class="bg-green-500 hover:bg-green-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full">
+                          <button class="bg-green-500 hover:bg-green-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={()=>makevote(Number(c[10]),1)} >
                             In Favour
                           </button>
-                          <button class="bg-red-500 hover:bg-red-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full">
+                          <button class="bg-red-500 hover:bg-red-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={()=>makevote(Number(c[10]),0)} >
                             Against
                           </button>
                         </div>

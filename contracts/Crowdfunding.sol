@@ -20,10 +20,16 @@ contract Crowdfunding {
         uint256 finalCount;
         address fundraiser;
     }
+    
+    struct Review{
+        string message;
+        address reviewer;
+        uint256 timestamp;
+    }
     address public admin;
     
     mapping(uint => Campaign) public campaigns;
-
+    mapping(uint256=>Review[]) public reviews;
     uint public campaignsCount;
     uint public approvalCount;
     uint public votingCount;
@@ -38,6 +44,18 @@ contract Crowdfunding {
         finishedCount = 0;
     }
     
+    function addReview(uint256 _id,string memory _message,address _reviewer) public {
+            Review memory review;
+            review.message=_message;
+            review.reviewer=_reviewer;
+            review.timestamp=block.timestamp;
+            reviews[_id].push(review);
+    }
+    
+    function getReview(uint256 _id) public view returns(Review[] memory){
+        return reviews[_id];
+    }
+
     function createCampaign(address _seeker,string memory _title, string memory _description, uint _goal,string memory _documentURL,string memory _imageURL) public returns(uint256){
         Campaign storage campaign=campaigns[campaignsCount];
         campaign.seeker=_seeker;

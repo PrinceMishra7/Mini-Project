@@ -2,6 +2,7 @@ import { Routes, Route, BrowserRouter} from "react-router-dom";
 import CreateCampaign from './components/user/CreateCampaign';
 import CampaignList from "./components/admin/CampaignList";
 import CampaignPage from "./components/admin/CampaignPage";
+// import UCampaignPage from "./components/user/CampaignPage";
 import PendingAdminApproval from "./components/admin/PendingAdminApproval";
 import VoteCampaign from "./components/user/VoteCampaign"
 import FinishVoting from "./components/admin/FinishVoting";
@@ -10,6 +11,8 @@ import Landing from "./components/Landing";
 import UserDashboard from "./components/user/UserDashboard";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import DonationCampaign from "./components/user/DonationCampaign";
+import CampaignVoteList from "./components/user/CampaignVoteList";
+import Review from './components/user/Review';
 import './App.css';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
@@ -31,6 +34,8 @@ function App() {
         <Route path='/admin/dashboard' element={<AdminDashboard/>} />
         <Route path='/user/donate/:id' element={<DonationCampaign/>} />
         <Route path='/admin/campaign/:id' element={<CampaignPage/>} />
+        <Route path='/user/campaign/:id' element={<CampaignVoteList/>} />
+        <Route path='/review' element={<Review/>} />
       </Routes>
       {/* <Footer/> */}
       </BrowserRouter>

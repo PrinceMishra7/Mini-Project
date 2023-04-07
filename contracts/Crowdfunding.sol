@@ -30,6 +30,8 @@ contract Crowdfunding {
     
     mapping(uint => Campaign) public campaigns;
     mapping(uint256=>Review[]) public reviews;
+    mapping(uint => uint) public duration;
+
     uint public campaignsCount;
     uint public approvalCount;
     uint public votingCount;
@@ -56,7 +58,7 @@ contract Crowdfunding {
         return reviews[_id];
     }
 
-    function createCampaign(address _seeker,string memory _title, string memory _description, uint _goal,string memory _documentURL,string memory _imageURL) public returns(uint256){
+    function createCampaign(address _seeker,string memory _title, string memory _description, uint _goal,string memory _documentURL,string memory _imageURL,uint _duration) public returns(uint256){
         Campaign storage campaign=campaigns[campaignsCount];
         campaign.seeker=_seeker;
         campaign.title=_title;
@@ -71,6 +73,7 @@ contract Crowdfunding {
         campaign.documentURL.push( _imageURL);
         campaign.finalCount = 0;
         campaign.fundraiser = msg.sender;
+        duration[campaignsCount] = _duration;
         campaignsCount++;
         approvalCount++;
         return campaignsCount;
@@ -93,12 +96,6 @@ contract Crowdfunding {
         votingCount++;
     }
 
-    // function startVoting(uint256 _id) public{
-    //     Campaign storage campaign = campaigns[_id];
-    //     require(msg.sender == admin, "Only admin can start voting");
-    //     campaign.phase=1;
-    // }
-
     function makeVote(uint256 _id,uint256 _val) public{
         Campaign storage campaign = campaigns[_id];
         require(campaign.phase == 1, "Voting closed");
@@ -114,6 +111,7 @@ contract Crowdfunding {
         votingCount--;
         uint256 len=campaign.votes.length;
         uint256 posVote=0;
+        duration[_id] = (duration[_id]*86400) + block.timestamp;
         for(uint256 i=0;i<len;i++){
             if(campaign.votes[i]==1){
                 posVote++;
@@ -129,31 +127,9 @@ contract Crowdfunding {
         }
     }
 
-    // function votingResult(uint256 _id) public{
-    //     Campaign storage campaign = campaigns[_id];
-    //     require(msg.sender == admin, "Only admin can declare result");
-    //     require(campaign.phase == 2, "Voting not yet closed");
-    //     campaign.phase=3;
-    //     uint256 len=campaign.votes.length;
-    //     uint256 posVote=0;
-    //     for(uint256 i=0;i<len;i++){
-    //         if(campaign.votes[i]==1){
-    //             posVote++;
-    //         }
-    //     }
-    //     if(posVote>=len/2){
-    //         campaign.voteApproved=true;
-            
-    //     }
-    //     else{
-    //         campaign.voteRejected=true;
-            
-    //     }
-    // }
     function donateToCampaign(uint256 _id) public payable{
         Campaign storage campaign = campaigns[_id];
         require(campaign.phase == 2,"Voting result not yet declared");
-        // require(campaign.rejected==false,"This Campaign has been rejected");
 
         uint256 amount = msg.value;
         campaign.donators.push(msg.sender);
@@ -167,27 +143,6 @@ contract Crowdfunding {
     function getDonators(uint256 _id) view public returns (address[] memory, uint256[] memory) {
         return (campaigns[_id].donators, campaigns[_id].donations);
     }
-
-    // function getCampaignPhase(uint256 _id) public view returns(string memory){
-    //     Campaign storage campaign=campaigns[_id];
-    //     uint status=campaign.phase;
-    //     string memory message="";
-    //     if(status==0){
-    //         if(campaign.rejected==true) message="Rejected by admin";  
-    //         else message="not yet approved by admin";   
-    //     }
-    //     else if(status==1){
-    //         message="admin approved, in voting phase";
-    //     }
-    //     else if(status==2){
-    //          message="admin approved, voting has closed";   
-    //     }
-    //     else if(status==3){
-    //         if(campaign.rejected==true) message="admin approved, rejected by people"; 
-    //         else if (campaign.voteApproved==true) message="admin approved, donation phase has started"; 
-    //     }
-    //     return message;
-    // }
 
     function getCampaigns() public view returns (Campaign[] memory) {
         Campaign[] memory allCampaigns = new Campaign[](campaignsCount);
@@ -228,6 +183,7 @@ contract Crowdfunding {
         for(uint i = 0; i < campaignsCount; i++) {
             if(campaigns[i].voteApproved!=true) continue;
             if(campaigns[i].phase != 2) continue;
+            if(duration[i] < block.timestamp) continue;
             Campaign storage item = campaigns[i];
             allCampaigns[temp] = item;
             temp++;

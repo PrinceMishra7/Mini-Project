@@ -46,10 +46,10 @@ contract Crowdfunding {
         finishedCount = 0;
     }
     
-    function addReview(uint256 _id,string memory _message,address _reviewer) public {
+    function addReview(uint256 _id,string memory _message) public {
             Review memory review;
             review.message=_message;
-            review.reviewer=_reviewer;
+            review.reviewer=msg.sender;
             review.timestamp=block.timestamp;
             reviews[_id].push(review);
     }

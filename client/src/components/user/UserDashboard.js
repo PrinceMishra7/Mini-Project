@@ -19,7 +19,7 @@ const UserDashboard = () => {
     <Navbar/>
     <div className='flex'>
     <Sidebar active='1' />
-    <main className='container w-5/5  px-5 my-5'>
+    <main className='container w-4/5  px-5 my-5'>
     <h2 class="mb-2 mt-2 ml-2 text-4xl font-medium leading-tight text-primary">
   Your ongoing Campaigns
 </h2>

@@ -14,11 +14,11 @@ export async function connectWallet(){
   return (await provider.getSigner()).address;
 }
 
-export async function createcampaign(_seeker, _title, _description, _goal, _downloadURL,_imageUrl) {
+export async function createcampaign(_seeker, _title, _description, _goal, _downloadURL,_imageUrl,_duration) {
   try {
     const signer = await provider.getSigner();
     const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
-    const tx = await contract.connect(signer).createCampaign(ethers.getAddress(_seeker), _title, _description, _goal, _downloadURL,_imageUrl);
+    const tx = await contract.connect(signer).createCampaign(ethers.getAddress(_seeker), _title, _description, _goal, _downloadURL,_imageUrl,_duration);
     console.log(tx);
   } catch (error) {
     console.log(error);
@@ -141,3 +141,30 @@ export async function getDetailCampaigns(_id){
     console.log(error);
   }
 }
+
+// review
+
+
+export async function addReview(_id,_message) {
+  try {
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const tx = await contract.connect(signer).addReview(_id,_message);
+    console.log(tx);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getReview(_id) {
+  try {
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const result = await contract.getReview(_id);
+    console.log(result)
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}
+

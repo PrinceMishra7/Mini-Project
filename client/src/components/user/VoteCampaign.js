@@ -27,7 +27,7 @@ const VoteCampaign = () => {
 
       <div className="flex">
         <Sidebar active="3" />
-        <div class="container px-5 my-5 ">
+        <div class="container px-5 my-5 w-4/5">
           {campaign
             ? campaign.map(
                 (c) => (

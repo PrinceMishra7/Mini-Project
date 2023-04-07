@@ -4,8 +4,9 @@ import { handleUploadClick,handleUploadsClick } from '../firebaseconfig';
 import Sidebar from './Sidebar';
 import "../admin/sidebar.css"
 import Navbar from './Navbar';
+import { duration } from '@mui/material';
 const CreateCampaign = () => {
-  const [details, setDetails] = useState({ seeker: "", title: "", description: "", goal: 0 });
+  const [details, setDetails] = useState({ seeker: "", title: "", description: "", goal: 0,duration:0 });
   let name, value;
 
   const [file, setFile] = useState(null);
@@ -53,7 +54,7 @@ const CreateCampaign = () => {
       let imageUrl = await uploadImage();
       let downloadUrl = await uploadFile();
       console.log("Creating Campaign")
-      await createcampaign(details.seeker, details.title, details.description, details.goal,downloadUrl,imageUrl);
+      await createcampaign(details.seeker, details.title, details.description, details.goal,downloadUrl,imageUrl,details.duration);
       console.log("Finished Campaign")
     } catch (error) {
       throw error;
@@ -118,11 +119,18 @@ const CreateCampaign = () => {
                 <input id="goal" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md   focus:border-blue-500  focus:outline-none focus:ring"   onChange={handleInputs} name="goal" value={details.goal}/>
             </div>
         </div>
-        <div class="grid grid-cols-1 gap-6 mt-4 p-2">
-            <div >
-                <label class="text-white " for="reciepent">Reciepent</label>
+        <div className="grid grid-cols-2 gap-6 mt-4 p-2">
+        <div >
+                <label class="text-white" for="reciepent">Reciepent</label>
                 <input id="reciepent" type="text" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md    focus:border-blue-500  focus:outline-none focus:ring" onChange={handleInputs} name="seeker" value={details.seeker}/>
             </div>
+        <div >
+                <label class="text-white " for="duration">Duration</label>
+                <input id="duration" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md    focus:border-blue-500  focus:outline-none focus:ring" onChange={handleInputs} name="duration" value={details.duration}/>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 gap-6 mt-4 p-2">
+          
           
             <div>
                 <label class="text-white " for="description">Description</label>

@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getDetailCampaigns,addReview,getReview } from '../config';
+import { getDetailCampaigns, addReview, getReview,makevote } from '../config';
 import VerifiedBadge from "../../images/pngwing.com.png"
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 const CampaignVoteList = () => {
     const [data, setData] = useState(null);
-    const [review,setReview]=useState("")
-    const [reviewList,setReviewList]=useState([])
+    const [review, setReview] = useState("")
+    const [reviewList, setReviewList] = useState([])
     let id = useParams();
-    
-    const fetchReviews=async()=>{
+
+    const fetchReviews = async () => {
         try {
-            const res=await getReview(id.id);
+            const res = await getReview(id.id);
             console.log(res);
             setReviewList(res);
-            
+
         } catch (error) {
             console.log(error.message)
         }
     }
-    const sendReview=async()=>{
-        console.log("message ",review)
-            try {
-                await addReview(id.id,review);
-                fetchReviews()
-            } catch (error) {
-                console.log(error.message);
-            }
+    const sendReview = async () => {
+        console.log("message ", review)
+        try {
+            await addReview(id.id, review);
+            fetchReviews()
+        } catch (error) {
+            console.log(error.message);
+        }
     }
     useEffect(() => {
         getDetailCampaigns(id).then(res => {
@@ -35,7 +35,7 @@ const CampaignVoteList = () => {
             console.log(res);
             fetchReviews();
         });
-       
+
     }, [])
     let per;
     if (data) {
@@ -50,7 +50,7 @@ const CampaignVoteList = () => {
                 <div className='flex'>
                     <Sidebar active='3' />
                     {/* main content */}
-                    <section class="w-3/5 p-6 pt-2 pb-0 mt-0 mx-auto bg-green-500  rounded-md shadow-md  my-10" style={{height:"450px"}} >
+                    <section class="w-3/5 p-6 pt-2 pb-0 mt-0 mx-auto bg-green-500  rounded-md shadow-md  my-10" style={{ height: "450px" }} >
                         <h1 class="text-xl font-bold text-white capitalize ">Campaign</h1>
 
                         <div>
@@ -70,82 +70,85 @@ const CampaignVoteList = () => {
                                                 <p class="text-white leading-relaxed mb-4">{data[1]}</p>
                                                 <div class="flex border-t border-gray-200 py-2">
                                                     <span class="text-white">Votes: </span>
-                                                    <span class="ml-auto text-white">{(Number(data[14]) / data[12].length) * 100}%</span>
+                                                    <span class="ml-auto text-white">{(data[11].length)}</span>
                                                 </div>
                                                 <div class="flex border-t border-b mb-6 border-gray-200 py-2">
-                                                    <span class="text-white">Contributors</span>
-                                                    <span class="ml-auto text-white">{data[9].length}</span>
+                                                    <span class="text-white">Goal</span>
+                                                    <span class="ml-auto text-white">{Number(data[3])}</span>
                                                 </div>
-                                                <div class="flex justify-between mb-1">
-                                                    <span class="text-base font-medium text-black">{Number(data[4])} ETH/ {Number(data[3])} ETH</span>
-                                                    <span class="text-sm font-medium text-black">{per}%</span>
+                                                <div class="flex justify-end mt-6">
+                                                    <div>
+                                                        <button class="bg-green-700 hover:bg-green-900 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={() => makevote(Number(data[10]), 1)} >
+                                                            In Favour
+                                                        </button>
+                                                        <button class="bg-red-500 hover:bg-red-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={() => makevote(Number(data[10]), 0)} >
+                                                            Against
+                                                        </button>
+                                                    </div>
+
                                                 </div>
-                                                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                                                    <div class="bg-blue-600 h-2.5 rounded-full" style={{ "width": per + '%' }}></div>
-                                                </div>
-                                               
                                             </div>
                                             <iframe class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src={data[13]} type="application/pdf" />
                                         </div>
                                     </div>
-                                </section> }
+                                </section>}
                         </div>
-                       
-    <h1 className='font-bold'>Write Message...</h1>
-    <label for="chat" class="sr-only">Your message</label>
-    <div class="flex items-center px-3 py-2 rounded-lg bg-green-500">
-       
-       
-        <textarea id="chat" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900  rounded-lg border border-green-500 focus:ring-green-500 focus:border-green-500" placeholder="Your message..." onChange={(e)=>{
-            setReview(e.target.value)
-       }} ></textarea>
-            <button class="inline-flex justify-center p-2 text-white rounded-full cursor-pointer hover:bg-green-700" onClick={sendReview}>
-            <svg aria-hidden="true" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
-            <span class="sr-only">Send message</span>
-        </button>
-    </div>
 
-       <div className='mt-10'>
-        <h1 className='font-bold'>Reviews</h1>
-        <div class='grid grid-cols-2 gap-4' >
-        {
-           reviewList && reviewList.map((rev)=>{
-            return(
-                <article class="rounded-xl relative border border-gray-700 bg-green-500 p-4" key={rev[2]}>
+                        <h1 className='font-bold'>Write Message...</h1>
+                        <label for="chat" class="sr-only">Your message</label>
+                        <div class="flex items-center px-3 py-2 rounded-lg bg-green-500">
 
-  <div class="flex items-center justify-between gap-4">
-    <div>
-      <div class="flow-root">
-        <ul class="-m-1 flex justify-between flex-wrap">
-          <li class="p-1 leading-none">
-            <h4 class="text-s font-bold text-black">Account</h4>
-            <h4 class="text-s mt-1 font-medium text-white">{rev[1]}</h4>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-                <hr className='mt-1'/>
-  <ul class="mt-4 space-y-2">
-    <li>
-        <p class="mt-1 text-s font-medium text-white">
-         {rev[0]}
-        </p>
-    </li>
-  </ul>
-<h3 className=' absolute top-3 right-3 text-xs text-grey'>{Number(rev[2])}</h3>
-</article>
 
-            )
-           }) 
-        }
-        </div>
-       
-       </div>
+                            <textarea id="chat" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900  rounded-lg border border-green-500 focus:ring-green-500 focus:border-green-500" placeholder="Your message..." onChange={(e) => {
+                                setReview(e.target.value)
+                            }} ></textarea>
+                            <button class="inline-flex justify-center p-2 text-white rounded-full cursor-pointer hover:bg-green-700" onClick={sendReview}>
+                                <svg aria-hidden="true" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
+                                <span class="sr-only">Send message</span>
+                            </button>
+                        </div>
+
+                        <div className='mt-10'>
+                            <h1 className='font-bold'>Reviews</h1>
+                            <div class='grid grid-cols-2 gap-4' >
+                                {
+                                    reviewList && reviewList.map((rev) => {
+                                        return (
+                                            <article class="rounded-xl relative border border-gray-700 bg-green-500 p-4" key={rev[2]}>
+
+                                                <div class="flex items-center justify-between gap-4">
+                                                    <div>
+                                                        <div class="flow-root">
+                                                            <ul class="-m-1 flex justify-between flex-wrap">
+                                                                <li class="p-1 leading-none">
+                                                                    <h4 class="text-s font-bold text-black">Account</h4>
+                                                                    <h4 class="text-s mt-1 font-medium text-white">{rev[1]}</h4>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr className='mt-1' />
+                                                <ul class="mt-4 space-y-2">
+                                                    <li>
+                                                        <p class="mt-1 text-s font-medium text-white">
+                                                            {rev[0]}
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                                <h3 className=' absolute top-3 right-3 text-xs text-grey'>{Number(rev[2])}</h3>
+                                            </article>
+
+                                        )
+                                    })
+                                }
+                            </div>
+
+                        </div>
 
 
                     </section>
-                    
+
 
                     {/* <div class="px-4 overflow-hidden md:px-16 pt-8 pb-12 bg-white">
     <div class="flex flex-wrap">
@@ -158,7 +161,7 @@ const CampaignVoteList = () => {
     </div>
                         </div> */}
 
-                
+
 
 
 

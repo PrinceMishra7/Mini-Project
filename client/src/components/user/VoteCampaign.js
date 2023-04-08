@@ -62,7 +62,7 @@ const VoteCampaign = () => {
                             Votes:{" "}
                           </h3>
                           <h3 class="hidden md:block font-bold text-lg text-gray-700">
-                            {(Number(c[14]) / c[12].length) * 100}%
+                          {(c[11].length)}
                           </h3>
                         </div>
                         <div className="flex justify-between">
@@ -73,24 +73,13 @@ const VoteCampaign = () => {
                             {c[9].length}
                           </h3>
                         </div>
-                        <div class="flex justify-between mb-1">
-                          <span class="text-base font-medium text-black">
-                            {Number(c[4])} ETH/ {Number(c[3])} ETH
-                          </span>
-                          <span class="text-sm font-medium text-black">
-                            {((Number(c[4]) / Number(c[3])) * 100).toFixed(2)}%
-                          </span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                          <div
-                            class="bg-blue-600 h-2.5 rounded-full"
-                            style={{
-                              width:
-                                ((Number(c[4]) / Number(c[3])) * 100).toFixed(
-                                  2
-                                ) + "%",
-                            }}
-                          ></div>
+                        <div className="flex justify-between">
+                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
+                            Goal: 
+                          </h3>
+                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
+                          {Number(c[3])} eth
+                          </h3>
                         </div>
                         <div class="flex justify-end mt-6">
                         <div>

@@ -55,5 +55,8 @@
 .widgetLgButton.Pending{
     background-color: #ebf1fe;
     color: #2a7ade;
-
+}
+.widgetLgButton.Voting{
+  background-color: #ebf1fe;
+  color: #dea52a;
 }

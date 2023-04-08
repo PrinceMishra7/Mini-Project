@@ -28,23 +28,35 @@ const FinishVoting = () => {
                     <h3 class="hidden md:block font-bold text-2xl text-gray-700">{c[0]}</h3>
                     {c[5] ? <img className='py-1 ' src={VerifiedBadge} width={20} height={20} /> : null}
                   </div>
-                  <h4 class="hidden md:block text-md text-gray-400">By {c[15]}</h4>
-                  <p class="text-gray-600 text-justify">{c[1]}</p>
-                  <div className='flex justify-between'>
-                    <h3 class="hidden md:block font-bold text-lg text-gray-700">Votes: </h3>
-                    <h3 class="hidden md:block font-bold text-lg text-gray-700">{(Number(c[14])/c[12].length) * 100}%</h3>
-                  </div>
-                  <div className='flex justify-between'>
-                    <h3 class="hidden md:block font-bold text-lg text-gray-700">Contributors: </h3>
-                    <h3 class="hidden md:block font-bold text-lg text-gray-700">{c[9].length}</h3>
-                  </div>
-                  <div class="flex justify-between mb-1">
-                    <span class="text-base font-medium text-black">{Number(c[4])} ETH/ {Number(c[3])} ETH</span>
-                    <span class="text-sm font-medium text-black">{(Number(c[4]) / Number(c[3]) * 100).toFixed(2)}%</span>
-                  </div>
-                  <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-2.5 rounded-full" style={{ "width": (Number(c[4]) / Number(c[3]) * 100).toFixed(2) + '%' }}></div>
-                  </div>
+                  <h4 class="hidden md:block text-md text-gray-400">
+                          By {c[15]}
+                        </h4>
+                        <p class="text-gray-600 text-justify">{c[1]}</p>
+                        <div className="flex justify-between">
+                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
+                            Votes:{" "}
+                          </h3>
+                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
+                          {(c[11].length)}
+                          </h3>
+                        </div>
+                        <div className="flex justify-between">
+                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
+                            Contributors:{" "}
+                          </h3>
+                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
+                            {c[9].length}
+                          </h3>
+                        </div>
+                        <div className="flex justify-between">
+                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
+                            Goal: 
+                          </h3>
+                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
+                          {Number(c[3])} eth
+                          </h3>
+                        </div>
+                  
                   <div class="flex justify-end mt-6">
                 <button class="px-6 py-2 tracking-wide text-white font-bold transition-colors duration-200 transform bg-green-900 rounded-md hover:bg-green-700 focus:outline-none focus:bg-green-600"
                   onClick={()=>endvoting(Number(c[10]))}

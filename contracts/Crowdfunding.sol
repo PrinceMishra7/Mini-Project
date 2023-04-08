@@ -194,4 +194,85 @@ contract Crowdfunding {
     function getDetailCampaign(uint256 _id) public view returns(Campaign memory){
         return campaigns[_id];
     }
+
+    function votedDonationCampaigns() public view returns(Campaign[] memory){
+        uint temp = 0;
+        for(uint i = 0 ; i<campaignsCount;i++){
+            for(uint j=0 ;j<campaigns[i].voters.length;j++){
+                if((campaigns[i].voters[j] == msg.sender) && campaigns[i].phase==2 ){
+                    temp++;
+                }
+            }
+        }
+        Campaign[] memory allCampaigns = new Campaign[](temp);
+        uint p = 0;
+        for(uint i = 0 ; i<campaignsCount;i++){
+            for(uint j=0 ;j<campaigns[i].voters.length;j++){
+                if((campaigns[i].voters[j] == msg.sender) && campaigns[i].phase==2){
+                    allCampaigns[p]=campaigns[i];
+                }
+            }
+        }
+        return allCampaigns;
+    }
+
+    function votedCampaigns() public view returns(Campaign[] memory){
+        uint temp = 0;
+        for(uint i = 0 ; i<campaignsCount;i++){
+            for(uint j=0 ;j<campaigns[i].voters.length;j++){
+                if((campaigns[i].voters[j] == msg.sender) && campaigns[i].phase==1 ){
+                    temp++;
+                }
+            }
+        }
+        Campaign[] memory allCampaigns = new Campaign[](temp);
+        uint p = 0;
+        for(uint i = 0 ; i<campaignsCount;i++){
+            for(uint j=0 ;j<campaigns[i].voters.length;j++){
+                if((campaigns[i].voters[j] == msg.sender) && campaigns[i].phase==1){
+                    allCampaigns[p]=campaigns[i];
+                }
+            }
+        }
+        return allCampaigns;
+    }
+
+    function donatedCampaigns() public view returns(Campaign[] memory){
+        uint temp = 0;
+        for(uint i = 0 ; i<campaignsCount;i++){
+            for(uint j=0 ;j<campaigns[i].donators.length;j++){
+                if((campaigns[i].donators[j] == msg.sender) && campaigns[i].phase==2 ){
+                    temp++;
+                }
+            }
+        }
+        Campaign[] memory allCampaigns = new Campaign[](temp);
+        uint p = 0;
+        for(uint i = 0 ; i<campaignsCount;i++){
+            for(uint j=0 ;j<campaigns[i].donators.length;j++){
+                if((campaigns[i].donators[j] == msg.sender) && campaigns[i].phase==2){
+                    allCampaigns[p]=campaigns[i];
+                }
+            }
+        }
+        return allCampaigns;
+    }
+
+    function myCampaigns() public view returns(Campaign[] memory){
+        uint temp = 0;
+        for(uint i = 0 ; i<campaignsCount;i++){
+            if(campaigns[i].fundraiser == msg.sender ){
+                temp++;
+            }
+        }
+        
+        Campaign[] memory allCampaigns = new Campaign[](temp);
+        uint p = 0;
+        for(uint i = 0 ; i<campaignsCount;i++){
+            if(campaigns[i].fundraiser == msg.sender ){
+                allCampaigns[p]=campaigns[i];
+            }
+        }
+        return allCampaigns;
+    }
 }

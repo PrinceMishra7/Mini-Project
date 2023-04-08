@@ -89,9 +89,6 @@ const CampaignVoteList = () => {
                                         </div>
                                     </div>
                                 </section> }
-
-                        
-
                         </div>
                        
     <h1 className='font-bold'>Write Message...</h1>

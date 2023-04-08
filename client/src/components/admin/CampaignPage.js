@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { getDetailCampaigns, donatetocampaign } from '../config';
+import { getDetailCampaigns,getReview } from '../config';
 import VerifiedBadge from "../../images/pngwing.com.png"
 import Sidebar from './Sidebar';
 import Navbar from './Navbar';
 const DonationCampaign = () => {
     const [amount, setAmount] = useState(0);
     const [data, setData] = useState(null);
+    const [review,setReview]=useState("")
+    const [reviewList,setReviewList]=useState([])
     let id = useParams();
+    const fetchReviews=async()=>{
+        try {
+            const res=await getReview(id.id);
+            console.log(res);
+            setReviewList(res);
+            
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
     useEffect(() => {
         getDetailCampaigns(id).then(res => {
             setData(res);
             console.log(res);
+            fetchReviews()
         });
        
     }, [])
@@ -75,6 +88,62 @@ const DonationCampaign = () => {
                                 </section> }
 
                         </div>
+
+
+{/* review section start */}
+
+
+   
+    {/* <div class="flex items-center px-3 py-2 rounded-lg bg-green-500">
+       
+       
+        <textarea id="chat" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900  rounded-lg border border-green-500 focus:ring-green-500 focus:border-green-500" placeholder="Your message..." onChange={(e)=>{
+            setReview(e.target.value)
+       }} ></textarea>
+            <button class="inline-flex justify-center p-2 text-white rounded-full cursor-pointer hover:bg-green-700" onClick={sendReview}>
+            <svg aria-hidden="true" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path></svg>
+            <span class="sr-only">Send message</span>
+        </button>
+    </div> */}
+    { reviewList && <div className='mt-10'>
+        <h1 className='font-bold'>Reviews</h1>
+        <div class='grid grid-cols-2 gap-4' >
+        {
+           reviewList && reviewList.map((rev)=>{
+            return(
+                <article class="rounded-xl relative border border-gray-700 bg-green-500 p-4" key={rev[2]}>
+
+  <div class="flex items-center justify-between gap-4">
+    <div>
+      <div class="flow-root">
+        <ul class="-m-1 flex justify-between flex-wrap">
+          <li class="p-1 leading-none">
+            <h4 class="text-s font-bold text-black">Account</h4>
+            <h4 class="text-s mt-1 font-medium text-white">{rev[1]}</h4>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+                <hr className='mt-1'/>
+  <ul class="mt-4 space-y-2">
+    <li>
+        <p class="mt-1 text-s font-medium text-white">
+         {rev[0]}
+        </p>
+    </li>
+  </ul>
+<h3 className=' absolute top-3 right-3 text-xs text-grey'>{Number(rev[2])}</h3>
+</article>
+
+            )
+           }) 
+        }
+        </div>
+       
+       </div>}
+
+{/* review section end */}
 
                     </section>
                 </div>

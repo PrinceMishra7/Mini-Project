@@ -34,27 +34,23 @@ const PendingAdminApproval = () => {
                   <h4 class="hidden md:block text-md text-gray-400">By {c[15]}</h4>
                   <p class="text-gray-600 text-justify">{c[1]}</p>
                   <div className='flex justify-between'>
-                    <h3 class="hidden md:block font-bold text-lg text-gray-700">Votes: </h3>
-                    <h3 class="hidden md:block font-bold text-lg text-gray-700">{(Number(c[14])/c[12].length) * 100}%</h3>
+                    <h3 class="hidden md:block font-bold text-lg text-gray-700">Receipent: </h3>
+                    <h3 class="hidden md:block font-bold text-lg text-gray-700">{c[2]}</h3>
                   </div>
                   <div className='flex justify-between'>
-                    <h3 class="hidden md:block font-bold text-lg text-gray-700">Contributors: </h3>
-                    <h3 class="hidden md:block font-bold text-lg text-gray-700">{c[9].length}</h3>
-                  </div>
-                  <div class="flex justify-between mb-1">
-                    <span class="text-base font-medium text-black">{Number(c[4])} ETH/ {Number(c[3])} ETH</span>
-                    <span class="text-sm font-medium text-black">{(Number(c[4]) / Number(c[3]) * 100).toFixed(2)}%</span>
-                  </div>
-                  <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                    <div class="bg-blue-600 h-2.5 rounded-full" style={{ "width": (Number(c[4]) / Number(c[3]) * 100).toFixed(2) + '%' }}></div>
+                    <h3 class="hidden md:block font-bold text-lg text-gray-700">Goal: </h3>
+                    <h3 class="hidden md:block font-bold text-lg text-gray-700">{Number(c[3])}</h3>
                   </div>
                   <div class="flex justify-between mt-6">
                 <button class="px-6 py-2 leading-5 text-white font-bold transition-colors duration-200 transform bg-green-700 rounded-md hover:bg-green-900 focus:outline-none focus:bg-green-600"
-                  onClick={()=>approvecampaign(Number(c[10]))}
+                  onClick={()=>approvecampaign(Number(c[8]))}
                 >Approve</button>
                 <button class="px-6 py-2 leading-5 text-white font-bold transition-colors duration-200 transform bg-red-900 rounded-md hover:bg-red-700 focus:outline-none focus:bg-red-600"
-                  onClick={()=>navigate('/admin/campaign/'+Number(c[8]))}
+                  onClick={()=>rejectcampaign(Number(c[8]))}
                 >Reject</button>
+                <button class="px-6 py-2 leading-5 text-white font-bold transition-colors duration-200 transform bg-green-900 rounded-md hover:bg-green-700 focus:outline-none focus:bg-green-600"
+                  onClick={()=>navigate('/admin/approval/'+Number(c[8]))}
+                >View More</button>
               </div>
                 </div>
               </div>

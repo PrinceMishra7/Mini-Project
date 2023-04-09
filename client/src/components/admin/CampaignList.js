@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getCampaign } from "../config";
+import { getUserDonatingCampaign} from "../config";
 import VerifiedBadge from "../../images/pngwing.com.png";
 import Sidebar from "./Sidebar";
 import Navbar from "./Navbar";
@@ -8,7 +8,7 @@ const CampaignList = () => {
   const navigate = useNavigate();
   const [campaign, setcampaign] = useState(null);
   useEffect(() => {
-    getCampaign().then((res) => setcampaign(res));
+    getUserDonatingCampaign().then((res) => setcampaign(res));
   }, []);
 
   return (

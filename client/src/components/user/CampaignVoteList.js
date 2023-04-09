@@ -50,7 +50,7 @@ const CampaignVoteList = () => {
                 <div className='flex'>
                     <Sidebar active='3' />
                     {/* main content */}
-                    <section class="w-3/5 p-6 pt-2 pb-0 mt-0 mx-auto bg-green-500  rounded-md shadow-md  my-10" style={{ height: "450px" }} >
+                    <section class="max-w-4xl p-6  mt-0 mx-auto bg-green-500  rounded-md shadow-md  my-auto" style={{ height: "450px" }} >
                         <h1 class="text-xl font-bold text-white capitalize ">Campaign</h1>
 
                         <div>
@@ -69,6 +69,10 @@ const CampaignVoteList = () => {
                                                 </div>
                                                 <p class="text-white leading-relaxed mb-4">{data[1]}</p>
                                                 <div class="flex border-t border-gray-200 py-2">
+                                                    <span class="text-white">Receipent: </span>
+                                                    <span class="ml-auto text-white">{(data[2])}</span>
+                                                </div>
+                                                <div class="flex border-t border-gray-200 py-2">
                                                     <span class="text-white">Votes: </span>
                                                     <span class="ml-auto text-white">{(data[11].length)}</span>
                                                 </div>
@@ -78,10 +82,10 @@ const CampaignVoteList = () => {
                                                 </div>
                                                 <div class="flex justify-end mt-6">
                                                     <div>
-                                                        <button class="bg-green-700 hover:bg-green-900 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={() => makevote(Number(data[10]), 1)} >
+                                                        <button class="bg-green-700 hover:bg-green-900 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={() => makevote(Number(data[8]), 1)} >
                                                             In Favour
                                                         </button>
-                                                        <button class="bg-red-500 hover:bg-red-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={() => makevote(Number(data[10]), 0)} >
+                                                        <button class="bg-red-500 hover:bg-red-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={() => makevote(Number(data[8]), 0)} >
                                                             Against
                                                         </button>
                                                     </div>

@@ -8,7 +8,7 @@ import ABI from '../artifacts/contracts/Crowdfunding.sol/Crowdfunding.json'
 // const provider = new JsonRpcProvider('http://localhost:8545');
 // const provider = ethers.getDefaultProvider('http://localhost:8545');
 let provider = new ethers.BrowserProvider(window.ethereum)
-export const contractAddress = '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'
+export const contractAddress = '0x95401dc811bb5740090279Ba06cfA8fcF6113778'
 
 export async function connectWallet(){
   return (await provider.getSigner()).address;
@@ -192,3 +192,38 @@ export async function getReview(_id) {
   }
 }
 
+export async function campaignCount(){
+  try {
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const result = await contract.campaignsCount();
+    console.log(result)
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function pendingCount(){
+  try {
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const result = await contract.approvalCount();
+    console.log(result)
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function donatingcount(){
+  try {
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(contractAddress, ABI.abi, signer);
+    const result = await contract.donatingCount();
+    console.log(result)
+    return result
+  } catch (error) {
+    console.log(error)
+  }
+}

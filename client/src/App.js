@@ -12,7 +12,7 @@ import UserDashboard from "./components/user/UserDashboard";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import DonationCampaign from "./components/user/DonationCampaign";
 import CampaignVoteList from "./components/user/CampaignVoteList";
-
+import Approval from "./components/admin/Approval";
 import './App.css';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
@@ -34,6 +34,7 @@ function App() {
         <Route path='/admin/dashboard' element={<AdminDashboard/>} />
         <Route path='/user/donate/:id' element={<DonationCampaign/>} />
         <Route path='/admin/campaign/:id' element={<CampaignPage/>} />
+        <Route path='/admin/approval/:id' element={<Approval/>} />
         <Route path='/user/campaign/:id' element={<CampaignVoteList/>} />
        
       </Routes>

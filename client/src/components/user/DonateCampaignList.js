@@ -18,7 +18,7 @@ const DonateCampaignList = () => {
         <Sidebar active='4' />
         <div class="container px-5 my-5 w-4/5 ">
           {campaign ? campaign.map((c) =>
-            <div class=" outline outline-offset-2 outline-green-500 relative rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2">
+            <div class=" outline outline-offset-2 outline-green-500 relative rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2 mb-2">
 
               <div class="z-0 order-1 md:order-2 relative w-full md:w-2/5 h-80 md:h-full overflow-hidden rounded-lg md:rounded-none md:rounded-r-lg">
                 <div class="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom"><img src={c[13][1]} className='w-full h-full' /></div>

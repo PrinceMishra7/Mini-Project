@@ -47,7 +47,7 @@ const UserDashboard = () => {
                         {Number(campaign[7])==0? <div className="widgetLgButton Pending">Review</div>:
                          Number(campaign[7])==1? <div className="widgetLgButton Voting">Voting</div>:
                          Number(campaign[7])==2 && !campaign[6]? <div className="widgetLgButton Declined">Rejected</div>:
-                         Number(campaign[7])==2 && !campaign[6]? <div className="widgetLgButton Approved">Donation</div>:
+                         Number(campaign[7])==2 && campaign[6]? <div className="widgetLgButton Approved">Donation</div>:
                          null
                          }
                         
@@ -58,12 +58,14 @@ const UserDashboard = () => {
               </table>
             </div>
             : null}
-
+          <h2 class="mb-2 mt-2 ml-2 text-4xl font-medium leading-tight text-primary">
+            Campaigns you voted for 
+          </h2>
           <div class="container px-5 my-5 ">
             {campaign
               ? campaign.map(
                 (c) => (
-                  <div class=" outline outline-offset-2 outline-green-500 relative rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2">
+                  <div class=" outline outline-offset-2 outline-green-500 relative rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2 mb-2">
                     <div class="z-0 order-1 md:order-2 relative w-full md:w-2/5 h-80 md:h-full overflow-hidden rounded-lg md:rounded-none md:rounded-r-lg">
                       <div class="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom">
                         <img src={c[13][1]} className="w-full h-full" />

@@ -31,7 +31,7 @@ const VoteCampaign = () => {
           {campaign
             ? campaign.map(
                 (c) => (
-                  <div class=" outline outline-offset-2 outline-green-500 relative rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2">
+                  <div class=" outline outline-offset-2 outline-green-500 relative rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-72 mx-2 mb-4">
                     <div class="z-0 order-1 md:order-2 relative w-full md:w-2/5 h-80 md:h-full overflow-hidden rounded-lg md:rounded-none md:rounded-r-lg">
                       <div class="absolute inset-0 w-full h-full object-fill object-center bg-blue-400 bg-opacity-30 bg-cover bg-bottom">
                         <img src={c[13][1]} className="w-full h-full" />
@@ -67,14 +67,6 @@ const VoteCampaign = () => {
                         </div>
                         <div className="flex justify-between">
                           <h3 class="hidden md:block font-bold text-lg text-gray-700">
-                            Contributors:{" "}
-                          </h3>
-                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
-                            {c[9].length}
-                          </h3>
-                        </div>
-                        <div className="flex justify-between">
-                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
                             Goal: 
                           </h3>
                           <h3 class="hidden md:block font-bold text-lg text-gray-700">
@@ -83,10 +75,10 @@ const VoteCampaign = () => {
                         </div>
                         <div class="flex justify-end mt-6">
                         <div>
-                          <button class="bg-green-500 hover:bg-green-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={()=>makevote(Number(c[10]),1)} >
+                          <button class="bg-green-500 hover:bg-green-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={()=>makevote(Number(c[8]),1)} >
                             In Favour
                           </button>
-                          <button class="bg-red-500 hover:bg-red-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={()=>makevote(Number(c[10]),0)} >
+                          <button class="bg-red-500 hover:bg-red-700 text-white w-32 font-bold py-2 px-4 mr-2 rounded-full" onClick={()=>makevote(Number(c[8]),0)} >
                             Against
                           </button>
                         </div>

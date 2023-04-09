@@ -42,14 +42,6 @@ const FinishVoting = () => {
                         </div>
                         <div className="flex justify-between">
                           <h3 class="hidden md:block font-bold text-lg text-gray-700">
-                            Contributors:{" "}
-                          </h3>
-                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
-                            {c[9].length}
-                          </h3>
-                        </div>
-                        <div className="flex justify-between">
-                          <h3 class="hidden md:block font-bold text-lg text-gray-700">
                             Goal: 
                           </h3>
                           <h3 class="hidden md:block font-bold text-lg text-gray-700">
@@ -59,7 +51,7 @@ const FinishVoting = () => {
                   
                   <div class="flex justify-end mt-6">
                 <button class="px-6 py-2 tracking-wide text-white font-bold transition-colors duration-200 transform bg-green-900 rounded-md hover:bg-green-700 focus:outline-none focus:bg-green-600"
-                  onClick={()=>endvoting(Number(c[10]))}
+                  onClick={()=>endvoting(Number(c[8]))}
                 >STOP</button>
               </div>
                 </div>

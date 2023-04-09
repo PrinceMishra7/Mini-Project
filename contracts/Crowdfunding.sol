@@ -118,13 +118,27 @@ contract Crowdfunding {
             }
         }
         campaign.finalCount = posVote;
-        if(posVote>=len/2){
-            campaign.voteApproved=true;
-            donatingCount++;
+        if(len%2==0){
+            if(posVote>=len/2){
+                campaign.voteApproved=true;
+                donatingCount++;
+            }
+            else{
+                campaign.voteApproved=false;
+            }
         }
-        else{
-            campaign.voteApproved=false;
+        else
+        {
+            if(posVote>=((len/2)+1)){
+                campaign.voteApproved=true;
+                donatingCount++;
+            }
+            else{
+                campaign.voteApproved=false;
+            }
         }
+        
+        
     }
 
     function donateToCampaign(uint256 _id) public payable{
@@ -199,7 +213,7 @@ contract Crowdfunding {
         uint temp = 0;
         for(uint i = 0 ; i<campaignsCount;i++){
             for(uint j=0 ;j<campaigns[i].voters.length;j++){
-                if((campaigns[i].voters[j] == msg.sender) && campaigns[i].phase==2 ){
+                if((campaigns[i].voters[j] == msg.sender) && campaigns[i].voteApproved==true && campaigns[i].phase==2){
                     temp++;
                 }
             }
@@ -208,8 +222,9 @@ contract Crowdfunding {
         uint p = 0;
         for(uint i = 0 ; i<campaignsCount;i++){
             for(uint j=0 ;j<campaigns[i].voters.length;j++){
-                if((campaigns[i].voters[j] == msg.sender) && campaigns[i].phase==2){
+                if((campaigns[i].voters[j] == msg.sender) && campaigns[i].voteApproved==true && campaigns[i].phase==2){
                     allCampaigns[p]=campaigns[i];
+                    p++;
                 }
             }
         }
@@ -231,6 +246,7 @@ contract Crowdfunding {
             for(uint j=0 ;j<campaigns[i].voters.length;j++){
                 if((campaigns[i].voters[j] == msg.sender) && campaigns[i].phase==1){
                     allCampaigns[p]=campaigns[i];
+                    p++;
                 }
             }
         }
@@ -252,6 +268,7 @@ contract Crowdfunding {
             for(uint j=0 ;j<campaigns[i].donators.length;j++){
                 if((campaigns[i].donators[j] == msg.sender) && campaigns[i].phase==2){
                     allCampaigns[p]=campaigns[i];
+                    p++;
                 }
             }
         }
@@ -271,6 +288,7 @@ contract Crowdfunding {
         for(uint i = 0 ; i<campaignsCount;i++){
             if(campaigns[i].fundraiser == msg.sender ){
                 allCampaigns[p]=campaigns[i];
+                p++;
             }
         }
         return allCampaigns;

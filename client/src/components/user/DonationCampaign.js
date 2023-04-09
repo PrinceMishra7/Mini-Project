@@ -65,6 +65,10 @@ const DonationCampaign = () => {
                                                 </div>
                                                 <p class="text-white leading-relaxed mb-4">{data[1]}</p>
                                                 <div class="flex border-t border-gray-200 py-2">
+                                                    <span class="text-white">Receipent: </span>
+                                                    <span class="ml-auto text-white">{(data[2])}</span>
+                                                </div>
+                                                <div class="flex border-t border-gray-200 py-2">
                                                     <span class="text-white">Votes: </span>
                                                     <span class="ml-auto text-white">{(Number(data[14]) / data[12].length) * 100}%</span>
                                                 </div>

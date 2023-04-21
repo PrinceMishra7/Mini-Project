@@ -31,6 +31,7 @@ contract Crowdfunding {
     mapping(uint => Campaign) public campaigns;
     mapping(uint256=>Review[]) public reviews;
     mapping(uint => uint) public duration;
+    mapping(uint => string) public campaignToCategory;
 
     uint public campaignsCount;
     uint public approvalCount;
@@ -58,7 +59,7 @@ contract Crowdfunding {
         return reviews[_id];
     }
 
-    function createCampaign(address _seeker,string memory _title, string memory _description, uint _goal,string memory _documentURL,string memory _imageURL,uint _duration) public returns(uint256){
+    function createCampaign(address _seeker,string memory _title, string memory _description, uint _goal,string memory _documentURL,string memory _imageURL,uint _duration,string memory _category) public returns(uint256){
         Campaign storage campaign=campaigns[campaignsCount];
         campaign.seeker=_seeker;
         campaign.title=_title;
@@ -74,6 +75,7 @@ contract Crowdfunding {
         campaign.finalCount = 0;
         campaign.fundraiser = msg.sender;
         duration[campaignsCount] = _duration;
+        campaignToCategory[campaignsCount]=_category;
         campaignsCount++;
         approvalCount++;
         return campaignsCount;
@@ -103,6 +105,15 @@ contract Crowdfunding {
         campaign.votes.push(_val);
     }
 
+
+    function calculatePercentage(uint256 value, uint256 total) public pure returns (uint256) {
+        uint256 percentage = (value * 10000) / total;
+        percentage = (percentage + 50) / 100;
+        return percentage;
+    }
+
+
+
     function endVoting(uint256 _id) public{
         Campaign storage campaign = campaigns[_id];
         require(msg.sender == admin, "Only admin can end voting");
@@ -118,8 +129,11 @@ contract Crowdfunding {
             }
         }
         campaign.finalCount = posVote;
-        if(len%2==0){
-            if(posVote>=len/2){
+        string memory category=campaignToCategory[_id];
+        uint256 percentage=calculatePercentage(posVote,len);
+
+        if(keccak256(abi.encodePacked((category))) == keccak256(abi.encodePacked(("Health")))){
+            if(percentage>=40){
                 campaign.voteApproved=true;
                 donatingCount++;
             }
@@ -127,9 +141,52 @@ contract Crowdfunding {
                 campaign.voteApproved=false;
             }
         }
-        else
-        {
-            if(posVote>=((len/2)+1)){
+        else if(keccak256(abi.encodePacked((category))) == keccak256(abi.encodePacked(("Education")))){
+
+            if(percentage>=45){
+                campaign.voteApproved=true;
+                donatingCount++;
+            }
+            else{
+                campaign.voteApproved=false;
+            }
+
+        }
+        else if(keccak256(abi.encodePacked((category))) == keccak256(abi.encodePacked(("Small Business")))){
+
+            if(percentage>=50){
+                campaign.voteApproved=true;
+                donatingCount++;
+            }
+            else{
+                campaign.voteApproved=false;
+            }
+            
+        }
+        else if(keccak256(abi.encodePacked((category))) == keccak256(abi.encodePacked(("Medium Business")))){
+            
+            if(percentage>=55){
+                campaign.voteApproved=true;
+                donatingCount++;
+            }
+            else{
+                campaign.voteApproved=false;
+            }
+
+        }
+        else if(keccak256(abi.encodePacked((category))) == keccak256(abi.encodePacked(("Large Business")))){
+
+            if(percentage>=60){
+                campaign.voteApproved=true;
+                donatingCount++;
+            }
+            else{
+                campaign.voteApproved=false;
+            }
+            
+        }
+        else if(keccak256(abi.encodePacked((category))) == keccak256(abi.encodePacked(("Personal")))){
+            if(percentage>=70){
                 campaign.voteApproved=true;
                 donatingCount++;
             }
@@ -137,7 +194,6 @@ contract Crowdfunding {
                 campaign.voteApproved=false;
             }
         }
-        
         
     }
 

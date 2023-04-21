@@ -50,7 +50,7 @@ const CampaignVoteList = () => {
                 <div className='flex'>
                     <Sidebar active='3' />
                     {/* main content */}
-                    <section class="max-w-4xl p-6  mt-0 mx-auto bg-green-500  rounded-md shadow-md  my-auto" style={{ height: "450px" }} >
+                    <section class="max-w-4xl p-6  mt-0 mx-auto bg-green-500  rounded-md shadow-md  my-auto" style={{ height: "550px" }} >
                         <h1 class="text-xl font-bold text-white capitalize ">Campaign</h1>
 
                         <div>

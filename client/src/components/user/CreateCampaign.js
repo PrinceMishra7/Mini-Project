@@ -8,7 +8,7 @@ import { duration } from '@mui/material';
 const CreateCampaign = () => {
   const [details, setDetails] = useState({ seeker: "", title: "", description: "", goal: 0,duration:0 });
   let name, value;
-
+  const [category,setCategory]=useState("");
   const [file, setFile] = useState(null);
   const [image, setImage] = useState(null);
   const [downloadUrl, setDownloadUrl] = useState(null);
@@ -54,7 +54,7 @@ const CreateCampaign = () => {
       let imageUrl = await uploadImage();
       let downloadUrl = await uploadFile();
       console.log("Creating Campaign")
-      await createcampaign(details.seeker, details.title, details.description, details.goal,downloadUrl,imageUrl,details.duration);
+      await createcampaign(details.seeker, details.title, details.description, details.goal,downloadUrl,imageUrl,details.duration,category);
       console.log("Finished Campaign")
     } catch (error) {
       throw error;
@@ -119,6 +119,8 @@ const CreateCampaign = () => {
                 <input id="goal" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md   focus:border-blue-500  focus:outline-none focus:ring"   onChange={handleInputs} name="goal" value={details.goal}/>
             </div>
         </div>
+
+
         <div className="grid grid-cols-2 gap-6 mt-4 p-2">
         <div >
                 <label class="text-white" for="reciepent">Reciepent</label>
@@ -129,6 +131,29 @@ const CreateCampaign = () => {
                 <input id="duration" type="number" class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md    focus:border-blue-500  focus:outline-none focus:ring" onChange={handleInputs} name="duration" value={details.duration}/>
             </div>
         </div>
+
+
+        <div class="grid grid-cols-1 gap-6 mt-4 p-2">
+            <div>
+              {/* <h1>{category}</h1> */}
+            <label for="countries" class="text-white">Category</label>
+      <select id="countries" class="bg-gray-50 border mt-2 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value={category} onChange={(e)=>{
+          setCategory(e.target.value);
+      }} >
+        <option selected>Choose a category</option>
+        <option value="Health">Health</option>
+        <option value="Education">Education</option>
+        <option value="Small Business">Small Business</option>
+        <option value="Medium Business">Medium Business</option>
+        <option value="Large Business">Large Business</option>
+        <option value="Personal">Personal Work</option>
+      </select>
+            </div>
+            
+        </div>
+
+
+
         <div class="grid grid-cols-1 gap-6 mt-4 p-2">
           
           

@@ -115,7 +115,7 @@ export async function endvoting(_id) {
   } catch (error) {
     console.log(error);
   }
-}
+} 
 
 export async function donatetocampaign(_id, val) {
   try {
